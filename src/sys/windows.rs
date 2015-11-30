@@ -66,3 +66,25 @@ impl Readv for WinSock {
         }
     }
 }
+
+#[test]
+fn test_rawv() {
+    use std::net::{TcpListener, TcpStream};
+    use std::thread;
+
+    let mut acceptor = TcpListener::bind("0.0.0.0").unwrap();
+    let addr = acceptor.local_addr().unwrap();
+
+    thread::spawn(move || {
+        let mut outgoing = TcpStream::connect(addr).unwrap();
+        outgoing.writev(&[b"foo", b"bar"]).unwrap();
+    });
+
+    let (mut incoming, _) = acceptor.accept().unwrap();
+    let mut one = [0u8; 2];
+    let mut two = [0u8; 4];
+
+    incoming.readv(&[&mut one, &mut two]).unwrap();
+    assert_eq!(&one, b"fo");
+    assert_eq!(&two, b"obar");
+}

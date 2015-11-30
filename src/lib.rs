@@ -1,15 +1,6 @@
 //! # vecio
 //!
 //! Vector IO operations, commonly referred to as scatter/gather IO.
-//!
-//! # Example
-//!
-//! ```rust
-//! use std::fs::File;
-//! use vecio::Rawv;
-//!
-//! File::create("/dev/null").unwrap()
-//!     .writev(&[b"foo", b"bar"]).unwrap();
 use std::io;
 
 mod sys;
