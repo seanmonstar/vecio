@@ -4,7 +4,7 @@ extern crate ws2_32;
 use std::io;
 use std::os::windows::io::{AsRawSocket, RawSocket};
 
-use self::winapi::{c_int, LPWSABUF};
+use self::winapi::{DWORD, LPWSABUF};
 
 use self::ws2_32::{WSASend, WSARecv};
 
@@ -29,11 +29,11 @@ impl Writev for WinSock {
             let ret = WSASend(
                 self.0,
                 buffers.as_ptr() as LPWSABUF,
-                buffers.len() as c_int,
+                buffers.len() as DWORD,
                 &mut bytes,
                 0,
-                0,
-                0
+                0 as *const _,
+                None
             );
             if ret != 0 {
                 Err(io::Error::last_os_error())
@@ -52,11 +52,11 @@ impl Readv for WinSock {
             let ret = WSARecv(
                 self.0,
                 buffers.as_ptr() as LPWSABUF,
-                buffers.len() as c_int,
+                buffers.len() as DWORD,
                 &mut bytes,
                 0,
-                0,
-                0
+                0 as *const _,
+                None
             );
             if ret != 0 {
                 Err(io::Error::last_os_error())
