@@ -1,6 +1,9 @@
 //! # vecio
 //!
 //! Vector IO operations, commonly referred to as scatter/gather IO.
+
+#![cfg_attr(test, deny(warnings))]
+
 use std::io;
 
 mod sys;
