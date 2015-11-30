@@ -4,9 +4,9 @@ extern crate ws2_32;
 use std::io;
 use std::os::windows::io::{AsRawSocket, RawSocket};
 
-use winapi::{c_int, LPWSABUF};
+use self::winapi::{c_int, LPWSABUF};
 
-use ws2_32::{WSASend, WSARecv};
+use self::ws2_32::{WSASend, WSARecv};
 
 use ::{Rawv, Writev, Readv};
 
