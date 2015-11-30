@@ -32,7 +32,7 @@ impl Writev for WinSock {
                 buffers.len() as DWORD,
                 &mut bytes,
                 0,
-                0 as *const _,
+                0 as *mut _,
                 None
             );
             if ret != 0 {
@@ -54,8 +54,8 @@ impl Readv for WinSock {
                 buffers.as_ptr() as LPWSABUF,
                 buffers.len() as DWORD,
                 &mut bytes,
-                0,
-                0 as *const _,
+                0 as *mut _,
+                0 as *mut _,
                 None
             );
             if ret != 0 {
