@@ -1,0 +1,11 @@
+[package]
+name = "vecio"
+description = "Vector IO, scatter/gather, writev, readv"
+keywords = ["writev", "readv", "vector", "io"]
+version = "0.0.0"
+authors = ["Sean McArthur <sean.monstar@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/seanmonstar/vecio"
+
+[dependencies]
+winapi = "0.2"
