@@ -72,7 +72,7 @@ fn test_rawv() {
     use std::net::{TcpListener, TcpStream};
     use std::thread;
 
-    let acceptor = TcpListener::bind("0.0.0.0:0").unwrap();
+    let acceptor = TcpListener::bind("127.0.0.1:3444").unwrap();
     let addr = acceptor.local_addr().unwrap();
 
     thread::spawn(move || {
