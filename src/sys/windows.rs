@@ -49,12 +49,13 @@ impl Readv for WinSock {
     fn readv(&mut self, buffers: &[&mut [u8]]) -> io::Result<usize> {
         unsafe {
             let mut bytes = 0;
+            let mut flags = 0;
             let ret = WSARecv(
                 self.0,
                 buffers.as_ptr() as LPWSABUF,
                 buffers.len() as DWORD,
                 &mut bytes,
-                0 as *mut _,
+                &mut flags,
                 0 as *mut _,
                 None
             );
