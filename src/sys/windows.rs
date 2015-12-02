@@ -4,7 +4,7 @@ extern crate ws2_32;
 use std::io;
 use std::os::windows::io::{AsRawSocket, RawSocket};
 
-use self::winapi::{DWORD, WSABUF, LPWSABUF};
+use self::winapi::{ULONG, DWORD, WSABUF, LPWSABUF};
 
 use self::ws2_32::{WSASend, WSARecv};
 
@@ -28,8 +28,8 @@ impl Writev for WinSock {
             let mut wsabufs = Vec::with_capacity(buffers.len());
             for buf in buffers {
                 wsabufs.push(WSABUF {
-                    buf: buf.as_ptr(),
-                    len: buf.len()
+                    buf: buf.as_ptr() as *const _,
+                    len: buf.len() as ULONG
                 });
             }
             let mut bytes = 0;
@@ -58,8 +58,8 @@ impl Readv for WinSock {
             let mut wsabufs = Vec::with_capacity(buffers.len());
             for buf in buffers {
                 wsabufs.push(WSABUF {
-                    buf: buf.as_ptr(),
-                    len: buf.len()
+                    buf: buf.as_mut_ptr() as *mut _,
+                    len: buf.len() as ULONG
                 });
             }
             let mut bytes = 0;
