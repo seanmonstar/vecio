@@ -4,7 +4,7 @@ extern crate ws2_32;
 use std::io;
 use std::os::windows::io::{AsRawSocket, RawSocket};
 
-use self::winapi::{DWORD, LPWSABUF};
+use self::winapi::{DWORD, WSABUF, LPWSABUF};
 
 use self::ws2_32::{WSASend, WSARecv};
 
@@ -25,11 +25,18 @@ impl<T: AsRawSocket> Rawv for T {
 impl Writev for WinSock {
     fn writev(&mut self, buffers: &[&[u8]]) -> io::Result<usize> {
         unsafe {
+            let mut wsabufs = Vec::with_capacity(buffers.len());
+            for buf in buffers {
+                wsabufs.push(WSABUF {
+                    buf: buf.as_ptr(),
+                    len: buf.len()
+                });
+            }
             let mut bytes = 0;
             let ret = WSASend(
                 self.0,
-                buffers.as_ptr() as LPWSABUF,
-                buffers.len() as DWORD,
+                wsabufs.as_ptr() as LPWSABUF,
+                wsabufs.len() as DWORD,
                 &mut bytes,
                 0,
                 0 as *mut _,
@@ -48,12 +55,19 @@ impl Writev for WinSock {
 impl Readv for WinSock {
     fn readv(&mut self, buffers: &[&mut [u8]]) -> io::Result<usize> {
         unsafe {
+            let mut wsabufs = Vec::with_capacity(buffers.len());
+            for buf in buffers {
+                wsabufs.push(WSABUF {
+                    buf: buf.as_ptr(),
+                    len: buf.len()
+                });
+            }
             let mut bytes = 0;
             let mut flags = 0;
             let ret = WSARecv(
                 self.0,
-                buffers.as_ptr() as LPWSABUF,
-                buffers.len() as DWORD,
+                wsabufs.as_ptr() as LPWSABUF,
+                wsabufs.len() as DWORD,
                 &mut bytes,
                 &mut flags,
                 0 as *mut _,
