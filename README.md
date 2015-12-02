@@ -2,6 +2,7 @@
 
 [![Unix Status](https://travis-ci.org/seanmonstar/vecio.svg?branch=master)](https://travis-ci.org/seanmonstar/vecio)
 [![Windows status](https://ci.appveyor.com/api/projects/status/kpxw3a297l822sb6?svg=true)](https://ci.appveyor.com/project/seanmonstar/vecio)
+[![crates.io](http://meritbadge.herokuapp.com/vecio)](https://crates.io/crates/vecio)
 
 Vector IO, scatter/gather, readv, writev
 
