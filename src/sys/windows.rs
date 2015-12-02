@@ -58,7 +58,7 @@ impl Readv for WinSock {
             let mut wsabufs = Vec::with_capacity(buffers.len());
             for buf in buffers {
                 wsabufs.push(WSABUF {
-                    buf: buf.as_mut_ptr() as *mut _,
+                    buf: buf.as_ptr() as *mut _,
                     len: buf.len() as ULONG
                 });
             }
