@@ -35,3 +35,16 @@ The `Rawv` trait implements `Writev` and `Readv` for any type that implements ei
 The `Writev` and `Readv` traits exist so that any type that needs a custom implementation can have one.
 
 In simple cases, just import `vecio::Rawv` will give the methods on the proper types.
+
+## License
+
+Licensed under either of
+
+* [Apache License, Version 2.0](LICENSE-APACHE)
+* [MIT license](LICENSE-MIT)
+
+at your option.
+
+### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
