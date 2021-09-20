@@ -2,7 +2,7 @@
 
 [![Unix Status](https://travis-ci.org/seanmonstar/vecio.svg?branch=master)](https://travis-ci.org/seanmonstar/vecio)
 [![Windows status](https://ci.appveyor.com/api/projects/status/kpxw3a297l822sb6?svg=true)](https://ci.appveyor.com/project/seanmonstar/vecio)
-[![crates.io](http://meritbadge.herokuapp.com/vecio)](https://crates.io/crates/vecio)
+[![crates.io](https://img.shields.io/crates/v/vecio.svg)](https://crates.io/crates/vecio)
 
 Vector IO, scatter/gather, readv, writev
 
@@ -30,7 +30,7 @@ There are 3 traits of import in `vecio`:
 - `Writev`
 - `Readv`
 
-The `Rawv` trait implements `Writev` and `Readv` for any type that implements either `AsRawFd` or `AsRawSocket` (unix and windows).
+The `Rawv` trait implements `Writev` and `Readv` for any type that implements either `AsRawFd` or `AsRawSocket` (Unix and Windows).
 
 The `Writev` and `Readv` traits exist so that any type that needs a custom implementation can have one.
 
